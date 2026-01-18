@@ -1,147 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Secret Message</title>
 
 <style>
-/* =======================
-   BODY & BACKGROUND
-======================= */
-body {
+/* ========== RESET ========== */
+* {
   margin: 0;
-  min-height: 100vh;
+  padding: 0;
+  box-sizing: border-box;
   font-family: "Georgia", serif;
-  background: url("bg.jpg") center/cover no-repeat fixed;
+}
+
+/* ========== BODY BACKGROUND ========== */
+body {
+  min-height: 100vh;
+  background: url("mobile-bg-v2.jpg") center / cover no-repeat fixed;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
 
-/* Mobile background */
-@media (max-width: 768px) {
+/* Desktop background */
+@media (min-width: 768px) {
   body {
-    background: url("mobile-bg-v2.jpg") center/cover no-repeat;
-    background-attachment: scroll;
-  }
-
-  /* Overlay for better contrast */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.45);
-    z-index: -1;
+    background: url("mobile-bg-v2.jpg") center / cover no-repeat fixed;
   }
 }
 
-/* =======================
-   OPEN BUTTON
-======================= */
+/* ========== OPEN BUTTON ========== */
 #openBtn {
-  padding: 16px 38px;
-  font-size: 18px;
-  border-radius: 40px;
+  padding: 18px 40px;
+  border-radius: 50px;
   border: none;
-  cursor: pointer;
-  background: linear-gradient(135deg, #7a0000, #c40000);
+  background: linear-gradient(135deg, #b00000, #ff2b2b);
   color: #fff;
-  box-shadow: 0 0 20px rgba(255,0,0,0.6);
-  animation: pulse 2s infinite;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.7);
 }
 
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
-/* =======================
-   MESSAGE BOX
-======================= */
-#overlay {
+/* ========== OVERLAY ========== */
+.overlay {
   position: fixed;
   inset: 0;
+  background: rgba(0,0,0,0.7);
   display: none;
   align-items: center;
   justify-content: center;
 }
 
-#box {
-  background: #000;
-  padding: 30px;
+/* ========== MESSAGE BOX ========== */
+.box {
   width: 90%;
-  max-width: 380px;
-  border-radius: 18px;
+  max-width: 420px;
+  background: #000;
+  border-radius: 25px;
+  padding: 30px;
   text-align: center;
   color: #fff;
-  box-shadow: 0 0 40px rgba(255,0,0,0.6);
   transform: scale(0.8);
   opacity: 0;
   transition: all 0.6s ease;
+  box-shadow: 0 0 40px rgba(255,0,0,0.6);
 }
 
-#box.show {
+.overlay.show .box {
   transform: scale(1);
   opacity: 1;
 }
 
-h1 {
-  color: #c40000;
+.box h1 {
+  color: #c70000;
   margin-bottom: 10px;
 }
 
-.subtitle {
-  font-size: 14px;
-  opacity: 0.85;
-}
-
-/* =======================
-   MESSAGE TEXT
-======================= */
-.message {
-  background: linear-gradient(135deg, #5a0000, #b00000);
-  border-radius: 14px;
-  padding: 18px;
-  margin: 20px 0;
-  font-size: 16px;
+.box p {
+  margin: 10px 0;
   line-height: 1.6;
-  opacity: 0;
-  animation: fadeIn 1.2s ease forwards;
-  animation-delay: 0.4s;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+.message {
+  background: linear-gradient(135deg, #7a0000, #b30000);
+  padding: 20px;
+  border-radius: 15px;
+  margin: 20px 0;
 }
 
 .by {
-  font-size: 13px;
-  color: #ff4d4d;
-  margin-bottom: 15px;
+  color: #b30000;
+  font-size: 14px;
+  margin-top: 10px;
 }
 
-/* =======================
-   CLOSE BUTTON
-======================= */
-#closeBtn {
-  padding: 10px 26px;
+/* ========== CLOSE BUTTON ========== */
+.close {
+  margin-top: 20px;
+  padding: 10px 30px;
   border-radius: 30px;
+  border: 1px solid red;
   background: transparent;
-  border: 1px solid #ff4d4d;
-  color: #fff;
+  color: white;
   cursor: pointer;
-}
-
-/* =======================
-   MOBILE TEXT IMPROVE
-======================= */
-@media (max-width: 480px) {
-  h1 { font-size: 22px; }
-  .message { font-size: 15px; }
 }
 </style>
 </head>
@@ -150,42 +112,28 @@ h1 {
 
 <button id="openBtn">Open Message 💌</button>
 
-<div id="overlay">
-  <div id="box">
+<div class="overlay" id="overlay">
+  <div class="box">
     <h1>Secret Message 💜</h1>
-    <div class="subtitle">
-      This message was not written for everyone…<br>
-      only for someone special 🌹
-    </div>
+    <p>This message was not written for everyone…<br>only for someone special 🌹</p>
 
     <div class="message">
-      I’m sorry, my dear 🤍<br>
-      You are my forever friend, Zina &lt;3 🌹
+      <p>I’m sorry, my dear 🤍</p>
+      <p>You are my forever friend, Zina &lt;3 🌹</p>
     </div>
 
     <div class="by">by ahmad khaled</div>
-    <button id="closeBtn">Close</button>
+    <button class="close" id="closeBtn">Close</button>
   </div>
 </div>
-
-<audio id="sound" src="sound.mp3"></audio>
 
 <script>
 const openBtn = document.getElementById("openBtn");
 const overlay = document.getElementById("overlay");
-const box = document.getElementById("box");
-const sound = document.getElementById("sound");
+const closeBtn = document.getElementById("closeBtn");
 
-openBtn.onclick = () => {
-  overlay.style.display = "flex";
-  setTimeout(() => box.classList.add("show"), 50);
-  sound.play().catch(()=>{});
-};
-
-document.getElementById("closeBtn").onclick = () => {
-  box.classList.remove("show");
-  setTimeout(() => overlay.style.display = "none", 400);
-};
+openBtn.onclick = () => overlay.classList.add("show");
+closeBtn.onclick = () => overlay.classList.remove("show");
 </script>
 
 </body>
