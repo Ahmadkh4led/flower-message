@@ -1,151 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Secret Message 🖤</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secret Message</title>
 
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            font-family: 'Georgia', serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: url("bg.jpg") no-repeat center center fixed;
-            background-size: cover;
-            overflow: hidden;
-        }
+<style>
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+    url("bg.jpg") center / cover no-repeat;
+  font-family: "Georgia", serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
 
-        .flower {
-            position: absolute;
-            font-size: 36px;
-            opacity: 0.8;
-            animation: float 6s infinite ease-in-out;
-        }
+/* ===== CARD ===== */
+.card {
+  background: rgba(0,0,0,0.88);
+  border-radius: 22px;
+  padding: 38px 28px;
+  width: 90%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 0 45px rgba(180,0,0,0.35);
+  transform: scale(0.8);
+  opacity: 0;
+  animation: cardIn 1.2s ease forwards;
+}
 
-        @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-18px); }
-            100% { transform: translateY(0); }
-        }
+/* ===== TITLE ===== */
+h1 {
+  color: #b30000;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
 
-        .box {
-            background: rgba(0,0,0,0.85);
-            padding: 45px 40px;
-            border-radius: 18px;
-            text-align: center;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.9);
-            max-width: 380px;
-            position: relative;
-        }
+/* ===== SUBTITLE ===== */
+.subtitle {
+  color: #ddd;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
 
-        .box::before {
-            content: "";
-            position: absolute;
-            top: -18px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 30px solid transparent;
-            border-right: 30px solid transparent;
-            border-bottom: 18px solid rgba(0,0,0,0.85);
-        }
+/* ===== MESSAGE BOX ===== */
+.message {
+  background: linear-gradient(135deg, #3a0000, #150000);
+  border-radius: 16px;
+  padding: 22px;
+  color: #fff;
+  font-size: 17px;
+  line-height: 1.7;
+  box-shadow: inset 0 0 25px rgba(255,0,0,0.2);
+  min-height: 90px;
+}
 
-        .box h1 {
-            color: #b11226;
-            font-size: 28px;
-            margin-bottom: 15px;
-        }
+/* ===== SIGNATURE ===== */
+.signature {
+  margin-top: 16px;
+  font-size: 13px;
+  color: #b30000;
+  font-style: italic;
+  opacity: 0;
+  animation: fadeIn 1.2s ease forwards;
+  animation-delay: 3.5s;
+}
 
-        .intro {
-            color: #d6d6d6;
-            font-size: 15px;
-            margin-bottom: 25px;
-            line-height: 1.6;
-        }
+/* ===== BUTTON ===== */
+.close-btn {
+  margin-top: 25px;
+  background: transparent;
+  border: 1px solid #b30000;
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 14px;
+}
 
-        button {
-            background: #7a0f1a;
-            border: none;
-            padding: 14px 32px;
-            border-radius: 30px;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+.close-btn:hover {
+  background: #b30000;
+}
 
-        button:hover {
-            background: #b11226;
-            transform: scale(1.05);
-        }
+/* ===== ANIMATIONS ===== */
+@keyframes cardIn {
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 
-        .secret-message {
-            display: none;
-            margin-top: 25px;
-            padding: 22px;
-            border-radius: 16px;
-            background: rgba(177, 18, 38, 0.2);
-            color: #f2f2f2;
-            font-size: 16px;
-            line-height: 1.8;
-            animation: fadeIn 0.9s ease;
-        }
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
 
-        .signature {
-            margin-top: 20px;
-            color: #b11226;
-            font-weight: bold;
-            font-size: 15px;
-        }
+/* ===== MOBILE IMPROVEMENTS ===== */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 22px;
+  }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(12px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
+  .message {
+    font-size: 16px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-    <!-- Flowers -->
-    <div class="flower" style="top:12%; left:18%;">🌹</div>
-    <div class="flower" style="top:75%; left:12%;">🌷</div>
-    <div class="flower" style="top:30%; left:82%;">🌸</div>
-    <div class="flower" style="top:80%; left:75%;">🌼</div>
+<audio id="sound" src="sound.mp3"></audio>
 
-    <div class="box">
-        <h1>Secret Message 🖤</h1>
+<div class="card" id="card">
+  <h1>Secret Message 🖤</h1>
 
-        <p class="intro">
-            This message was not written for everyone…<br>
-            only for someone special 🌹
-        </p>
+  <div class="subtitle">
+    This message was not written for everyone...<br>
+    only for someone special 🌹
+  </div>
 
-        <button id="openBtn" onclick="showMessage()">
-            Click here my dear
-        </button>
+  <div class="message" id="typedText"></div>
 
-        <div id="secretMessage" class="secret-message">
-            I’m sorry, my dear 🤍<br>
-            You are my forever friend, Zina &lt;3 🌹
-        </div>
-    </div>
+  <div class="signature">
+    by ahmad khaled
+  </div>
 
-    <script>
-        function showMessage() {
-            document.getElementById("secretMessage").style.display = "block";
-            document.getElementById("openBtn").style.display = "none";
-        }
-    </script>
+  <button class="close-btn" onclick="closeMessage()">Close</button>
+</div>
+
+<script>
+/* ===== SOUND ===== */
+window.onload = () => {
+  document.getElementById("sound").play();
+  typeEffect();
+};
+
+/* ===== TYPE EFFECT ===== */
+const text = `I’m sorry, my dear 🤍
+You are my forever friend, Zina <3 🌹`;
+
+let index = 0;
+function typeEffect() {
+  if (index < text.length) {
+    document.getElementById("typedText").innerHTML +=
+      text.charAt(index) === "\n" ? "<br>" : text.charAt(index);
+    index++;
+    setTimeout(typeEffect, 45);
+  }
+}
+
+/* ===== CLOSE BUTTON ===== */
+function closeMessage() {
+  const card = document.getElementById("card");
+  card.style.animation = "fadeOut 0.6s forwards";
+  setTimeout(() => {
+    card.style.display = "none";
+  }, 600);
+}
+
+/* ===== EXTRA ANIMATION ===== */
+const style = document.createElement("style");
+style.innerHTML = `
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}`;
+document.head.appendChild(style);
+</script>
 
 </body>
 </html>
