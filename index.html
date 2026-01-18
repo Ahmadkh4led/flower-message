@@ -1,150 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Secret Message</title>
 
 <style>
-/* ===== Reset ===== */
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
   font-family: "Georgia", serif;
 }
 
 body {
-  min-height: 100vh;
+  margin: 0;
+  height: 100vh;
+  background: url("bg.jpg") no-repeat center center fixed;
+  background-size: cover;
   display: flex;
-  align-items: center;
   justify-content: center;
-  background: #000;
+  align-items: center;
   overflow: hidden;
-  position: relative;
 }
 
-/* ===== Background (Desktop) ===== */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: url("bg.jpg") center / cover no-repeat;
-  z-index: 1;
-  pointer-events: none; /* 🔥 مهم */
-}
-
-/* ===== Background (Mobile) ===== */
+/* خلفية للموبايل */
 @media (max-width: 768px) {
-  body::before {
-    background: url("mobile-bg-v2.jpg") center / cover no-repeat;
+  body {
+    background: url("mobile-bg.jpg") no-repeat center center fixed;
+    background-size: cover;
   }
 }
 
-/* ===== Open Button ===== */
+/* زر الفتح */
 #openBtn {
-  position: relative;
-  z-index: 5;
-  padding: 16px 36px;
-  background: linear-gradient(135deg, #b00000, #ff2a2a);
-  color: #fff;
+  padding: 18px 40px;
+  font-size: 18px;
+  border-radius: 40px;
   border: none;
-  border-radius: 50px;
-  font-size: 20px;
   cursor: pointer;
-  box-shadow: 0 0 25px rgba(255,0,0,0.6);
-  animation: pulse 2s infinite;
+  background: linear-gradient(135deg, #ff1a1a, #b30000);
+  color: white;
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
+  transition: transform 0.3s ease;
+  z-index: 2;
 }
 
-@keyframes pulse {
-  0% { box-shadow: 0 0 15px rgba(255,0,0,.6); }
-  50% { box-shadow: 0 0 35px rgba(255,0,0,1); }
-  100% { box-shadow: 0 0 15px rgba(255,0,0,.6); }
+#openBtn:hover {
+  transform: scale(1.08);
 }
 
-/* ===== Overlay ===== */
-.overlay {
+/* الخلفية المعتمة */
+#overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.65);
   display: none;
-  align-items: center;
   justify-content: center;
-  z-index: 10;
+  align-items: center;
+  z-index: 5;
 }
 
-/* ===== Message Box ===== */
-.box {
+/* البوكس */
+#box {
   background: #000;
-  border-radius: 22px;
-  padding: 28px 26px 30px;
+  border-radius: 20px;
+  padding: 30px;
   width: 90%;
   max-width: 420px;
   text-align: center;
-  color: #fff;
-  box-shadow: 0 0 45px rgba(255,0,0,0.5);
+  color: white;
+  box-shadow: 0 0 40px rgba(255,0,0,0.4);
   transform: scale(0.8);
   opacity: 0;
-  animation: showBox 0.6s ease forwards;
+  transition: all 0.6s ease;
 }
 
-@keyframes showBox {
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+#box.show {
+  transform: scale(1);
+  opacity: 1;
 }
 
-.box h1 {
-  color: crimson;
+h1 {
+  color: #ff3333;
   margin-bottom: 10px;
 }
 
-.box p {
+p {
   opacity: 0;
-  animation: fadeText 1s ease forwards;
-  animation-delay: 0.5s;
+  animation: fadeIn 1.2s forwards;
 }
 
-@keyframes fadeText {
-  to { opacity: 1; }
-}
-
-/* ===== Message ===== */
 .message {
-  margin: 18px 0;
+  background: linear-gradient(135deg, #8b0000, #ff0000);
   padding: 18px;
-  background: linear-gradient(135deg, #6b0000, #b00000);
   border-radius: 15px;
+  margin: 20px 0;
 }
 
-/* ===== Footer ===== */
-.by {
-  margin-top: 10px;
-  font-size: 13px;
+small {
   color: #ff4d4d;
 }
 
-/* ===== Close Button ===== */
-.close {
-  margin-top: 18px;
-  padding: 10px 28px;
-  background: transparent;
-  border: 1px solid crimson;
-  color: white;
+#closeBtn {
+  margin-top: 15px;
+  padding: 10px 25px;
   border-radius: 25px;
+  border: 1px solid red;
+  background: transparent;
+  color: white;
   cursor: pointer;
 }
 
-/* ===== Mobile Enhancements ===== */
-@media (max-width: 480px) {
-  #openBtn {
-    font-size: 18px;
-    padding: 14px 30px;
-  }
-
-  .box {
-    padding: 24px 20px;
+@keyframes fadeIn {
+  to {
+    opacity: 1;
   }
 }
 </style>
@@ -154,38 +122,37 @@ body::before {
 
 <button id="openBtn">Open Message 💌</button>
 
-<div class="overlay" id="overlay">
-  <div class="box">
+<div id="overlay">
+  <div id="box">
     <h1>Secret Message 💜</h1>
-    <p>This message was not written for everyone...<br>only for someone special 🌹</p>
+    <p>This message was not written for everyone… only for someone special 🌹</p>
 
     <div class="message">
       <p>
-        I’m sorry, my dear 🤍<br>
+        I’m sorry, my dear 🤍<br />
         You are my forever friend, Zina &lt;3 🌹
       </p>
     </div>
 
-    <div class="by">by ahmad khaled</div>
-    <button class="close" id="closeBtn">Close</button>
+    <small>by ahmad khaled</small><br /><br />
+    <button id="closeBtn">Close</button>
   </div>
 </div>
-
-<audio id="sound" src="sound.mp3"></audio>
 
 <script>
 const openBtn = document.getElementById("openBtn");
 const overlay = document.getElementById("overlay");
+const box = document.getElementById("box");
 const closeBtn = document.getElementById("closeBtn");
-const sound = document.getElementById("sound");
 
 openBtn.onclick = () => {
   overlay.style.display = "flex";
-  sound.play().catch(()=>{});
+  setTimeout(() => box.classList.add("show"), 50);
 };
 
 closeBtn.onclick = () => {
-  overlay.style.display = "none";
+  box.classList.remove("show");
+  setTimeout(() => overlay.style.display = "none", 500);
 };
 </script>
 
