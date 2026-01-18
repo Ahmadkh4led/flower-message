@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>موقعي الصغير 🌸</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ffd1dc, #ffe6f0);
+            overflow: hidden;
+        }
+
+        /* ورود بالخلفية */
+        .flower {
+            position: absolute;
+            font-size: 40px;
+            opacity: 0.6;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+
+        .box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 2;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #e75480;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 30px;
+            background: #e75480;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #d63c6f;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ورود -->
+    <div class="flower" style="top:10%; left:20%;">🌸</div>
+    <div class="flower" style="top:70%; left:10%;">🌷</div>
+    <div class="flower" style="top:30%; left:80%;">🌹</div>
+    <div class="flower" style="top:80%; left:70%;">🌼</div>
+
+    <!-- المحتوى -->
+    <div class="box">
+        <h1>اضغط على الكبسة 🌸</h1>
+        <button onclick="showMessage()">اضغط هنا</button>
+    </div>
+
+    <script>
+        function showMessage() {
+            alert("💌 هاي هي الميسج! يسعدني أنك ضغطت 🌷");
+        }
+    </script>
+
+</body>
+</html>
