@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Secret Message 🖤</title>
@@ -12,15 +12,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-
-            /* خلفية الصورة */
             background: url("bg.jpg") no-repeat center center fixed;
             background-size: cover;
-
             overflow: hidden;
         }
 
-        /* ورود متحركة */
         .flower {
             position: absolute;
             font-size: 36px;
@@ -34,21 +30,16 @@
             100% { transform: translateY(0); }
         }
 
-        /* البوكس الأسود (ستايل ظرف) */
         .box {
-            background: #0b0b0b;
+            background: rgba(0,0,0,0.85);
             padding: 45px 40px;
             border-radius: 18px;
             text-align: center;
-            box-shadow:
-                0 20px 50px rgba(0,0,0,0.9),
-                inset 0 0 0 1px rgba(255,255,255,0.05);
-            z-index: 2;
-            max-width: 360px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.9);
+            max-width: 380px;
             position: relative;
         }
 
-        /* غطاء الظرف */
         .box::before {
             content: "";
             position: absolute;
@@ -59,7 +50,7 @@
             height: 0;
             border-left: 30px solid transparent;
             border-right: 30px solid transparent;
-            border-bottom: 18px solid #0b0b0b;
+            border-bottom: 18px solid rgba(0,0,0,0.85);
         }
 
         .box h1 {
@@ -75,10 +66,10 @@
             line-height: 1.6;
         }
 
-        .box button {
-            background: #b11226;
+        button {
+            background: #7a0f1a;
             border: none;
-            padding: 14px 30px;
+            padding: 14px 32px;
             border-radius: 30px;
             color: white;
             font-size: 16px;
@@ -86,34 +77,34 @@
             transition: 0.3s;
         }
 
-        .box button:hover {
-            background: #8e0f1f;
+        button:hover {
+            background: #b11226;
             transform: scale(1.05);
         }
 
-        /* الرسالة الداخلية */
         .secret-message {
             display: none;
             margin-top: 25px;
-            padding: 20px;
-            border-radius: 14px;
-            background: rgba(177, 18, 38, 0.15);
+            padding: 22px;
+            border-radius: 16px;
+            background: rgba(177, 18, 38, 0.2);
             color: #f2f2f2;
             font-size: 16px;
             line-height: 1.8;
-            animation: fadeIn 0.8s ease;
+            animation: fadeIn 0.9s ease;
         }
 
         .signature {
             margin-top: 20px;
             color: #b11226;
             font-weight: bold;
+            font-size: 15px;
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(10px);
+                transform: translateY(12px);
             }
             to {
                 opacity: 1;
@@ -125,13 +116,12 @@
 
 <body>
 
-    <!-- ورود -->
+    <!-- Flowers -->
     <div class="flower" style="top:12%; left:18%;">🌹</div>
     <div class="flower" style="top:75%; left:12%;">🌷</div>
     <div class="flower" style="top:30%; left:82%;">🌸</div>
     <div class="flower" style="top:80%; left:75%;">🌼</div>
 
-    <!-- البوكس -->
     <div class="box">
         <h1>Secret Message 🖤</h1>
 
@@ -144,14 +134,9 @@
             Click here my dear
         </button>
 
-        <!-- الرسالة -->
         <div id="secretMessage" class="secret-message">
-            انا اسف يقلبي 🤍<br>
-            انتي صديقتي، صديقة بحب زينة 🌹
-
-            <div class="signature">
-                أحمد الدمعة سيط وسمعة
-            </div>
+            I’m sorry, my dear 🤍<br>
+            You are my forever friend, Zina &lt;3 🌹
         </div>
     </div>
 
