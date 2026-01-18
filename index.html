@@ -1,155 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Secret Message</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secret Message</title>
 
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      font-family: "Georgia", serif;
+<style>
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Georgia', serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-      background:
-        linear-gradient(
-          rgba(0, 0, 0, 0.55),
-          rgba(0, 0, 0, 0.55)
-        ),
-        url("bg.jpg") no-repeat center center;
+  background:
+    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+    url("mobile-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
-      background-size: cover;
-      background-attachment: fixed;
+/* زر فتح الرسالة */
+.open-btn {
+  padding: 16px 36px;
+  font-size: 18px;
+  color: #fff;
+  background: linear-gradient(135deg, #b00000, #ff2b2b);
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  box-shadow: 0 0 25px rgba(255,0,0,0.6);
+  transition: transform 0.3s;
+}
 
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+.open-btn:hover {
+  transform: scale(1.05);
+}
 
-    /* زر فتح الرسالة */
-    .open-btn {
-      padding: 18px 36px;
-      font-size: 18px;
-      border-radius: 40px;
-      border: none;
-      background: #8b0000;
-      color: #fff;
-      cursor: pointer;
-      box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
+/* خلفية التعتيم */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
 
-    .open-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px rgba(255, 0, 0, 0.7);
-    }
+/* البوكس */
+.card {
+  background: #000;
+  color: #fff;
+  width: 90%;
+  max-width: 420px;
+  padding: 30px;
+  border-radius: 22px;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(255,0,0,0.6);
 
-    /* صندوق الرسالة */
-    .box {
-      display: none;
-      opacity: 0;
-      transform: scale(0.85);
-      transition: all 0.8s ease;
+  opacity: 0;
+  transform: scale(0.85);
+  transition: all 0.6s ease;
+}
 
-      background: #000;
-      border-radius: 20px;
-      padding: 35px 30px;
-      text-align: center;
-      box-shadow: 0 0 40px rgba(255, 0, 0, 0.4);
-      max-width: 90%;
-    }
+/* عند الظهور */
+.overlay.show .card {
+  opacity: 1;
+  transform: scale(1);
+}
 
-    .box.show {
-      display: block;
-      opacity: 1;
-      transform: scale(1);
-    }
+/* العنوان */
+.card h1 {
+  color: #c00000;
+  margin-bottom: 10px;
+}
 
-    .title {
-      color: crimson;
-      font-size: 28px;
-      margin-bottom: 10px;
-    }
+/* النص الصغير */
+.subtitle {
+  font-size: 14px;
+  opacity: 0.85;
+  margin-bottom: 20px;
+}
 
-    .subtitle {
-      color: #ddd;
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
+/* صندوق الرسالة */
+.message {
+  background: linear-gradient(135deg, #6a0000, #b00000);
+  padding: 18px;
+  border-radius: 16px;
+  margin-bottom: 14px;
+  font-size: 17px;
+  line-height: 1.6;
+}
 
-    .message {
-      background: linear-gradient(135deg, #8b0000, #400000);
-      padding: 20px;
-      border-radius: 15px;
-      color: #fff;
-      font-size: 17px;
-      margin-bottom: 15px;
-      opacity: 0;
-      animation: fadeText 2s forwards;
-      animation-delay: 0.5s;
-    }
+/* التوقيع */
+.signature {
+  font-size: 13px;
+  color: #ff4d4d;
+  margin-bottom: 16px;
+}
 
-    @keyframes fadeText {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+/* زر الإغلاق */
+.close-btn {
+  padding: 10px 26px;
+  border-radius: 30px;
+  background: transparent;
+  color: #fff;
+  border: 1px solid #ff2b2b;
+  cursor: pointer;
+  transition: background 0.3s;
+}
 
-    .by {
-      color: #c0392b;
-      font-size: 13px;
-      margin-bottom: 20px;
-    }
+.close-btn:hover {
+  background: #ff2b2b;
+}
 
-    .close-btn {
-      padding: 10px 24px;
-      border-radius: 30px;
-      border: 1px solid crimson;
-      background: transparent;
-      color: #fff;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
+/* تحسين للموبايل */
+@media (max-width: 768px) {
+  .card {
+    padding: 22px;
+  }
 
-    .close-btn:hover {
-      background: crimson;
-    }
-
-    /* تحسين الموبايل */
-    @media (max-width: 768px) {
-      body {
-        background-position: center top;
-        background-attachment: scroll;
-      }
-
-      .title {
-        font-size: 24px;
-      }
-
-      .message {
-        font-size: 16px;
-      }
-
-      .open-btn {
-        font-size: 16px;
-        padding: 16px 30px;
-      }
-    }
-  </style>
+  .message {
+    font-size: 16px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <button class="open-btn" onclick="openMessage()">Open Message 💌</button>
+<button class="open-btn" onclick="openMessage()">Open Message 💌</button>
 
-  <div class="box" id="box">
-    <div class="title">Secret Message 💜</div>
+<div class="overlay" id="overlay">
+  <div class="card">
+    <h1>Secret Message 💜</h1>
     <div class="subtitle">
       This message was not written for everyone...<br>
       only for someone special 🌹
@@ -160,33 +146,31 @@
       You are my forever friend, Zina &lt;3 🌹
     </div>
 
-    <div class="by">by ahmad khaled</div>
+    <div class="signature">by ahmad khaled</div>
 
     <button class="close-btn" onclick="closeMessage()">Close</button>
   </div>
+</div>
 
-  <!-- صوت -->
-  <audio id="sound">
-    <source src="https://www.soundjay.com/buttons/sounds/button-16.mp3" type="audio/mpeg">
-  </audio>
+<!-- صوت خفيف -->
+<audio id="sound" src="https://www.soundjay.com/buttons/sounds/button-30.mp3"></audio>
 
-  <script>
-    function openMessage() {
-      document.querySelector(".open-btn").style.display = "none";
-      const box = document.getElementById("box");
-      box.classList.add("show");
-      document.getElementById("sound").play();
-    }
+<script>
+function openMessage() {
+  document.getElementById("overlay").style.display = "flex";
+  setTimeout(() => {
+    document.getElementById("overlay").classList.add("show");
+  }, 50);
+  document.getElementById("sound").play();
+}
 
-    function closeMessage() {
-      const box = document.getElementById("box");
-      box.classList.remove("show");
-      setTimeout(() => {
-        box.style.display = "none";
-        document.querySelector(".open-btn").style.display = "block";
-      }, 600);
-    }
-  </script>
+function closeMessage() {
+  document.getElementById("overlay").classList.remove("show");
+  setTimeout(() => {
+    document.getElementById("overlay").style.display = "none";
+  }, 400);
+}
+</script>
 
 </body>
 </html>
