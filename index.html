@@ -7,39 +7,34 @@
 
 <style>
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
   font-family: "Georgia", serif;
 }
 
 body {
-  margin: 0;
-  height: 100vh;
-  background: url("bg.jpg") no-repeat center center fixed;
+  min-height: 100vh;
+  background-image: url("background.jpg");
   background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   overflow: hidden;
 }
 
-/* خلفية للموبايل */
-@media (max-width: 768px) {
-  body {
-    background: url("mobile-bg.jpg") no-repeat center center fixed;
-    background-size: cover;
-  }
-}
-
-/* زر الفتح */
+/* زر فتح الرسالة */
 #openBtn {
-  padding: 18px 40px;
-  font-size: 18px;
-  border-radius: 40px;
+  padding: 16px 36px;
+  background: #b30000;
+  color: #fff;
   border: none;
+  border-radius: 40px;
+  font-size: 18px;
   cursor: pointer;
-  background: linear-gradient(135deg, #ff1a1a, #b30000);
-  color: white;
-  box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
+  box-shadow: 0 0 25px rgba(255,0,0,0.6);
   transition: transform 0.3s ease;
   z-index: 2;
 }
@@ -48,72 +43,81 @@ body {
   transform: scale(1.08);
 }
 
-/* الخلفية المعتمة */
+/* الخلفية الغامقة */
 #overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.65);
+  background: rgba(0,0,0,0.7);
   display: none;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   z-index: 5;
 }
 
-/* البوكس */
-#box {
+/* صندوق الرسالة */
+#messageBox {
   background: #000;
-  border-radius: 20px;
-  padding: 30px;
+  color: #fff;
+  padding: 30px 25px;
   width: 90%;
   max-width: 420px;
+  border-radius: 20px;
   text-align: center;
-  color: white;
-  box-shadow: 0 0 40px rgba(255,0,0,0.4);
+  box-shadow: 0 0 40px rgba(255,0,0,0.5);
   transform: scale(0.8);
   opacity: 0;
   transition: all 0.6s ease;
 }
 
-#box.show {
+#messageBox.show {
   transform: scale(1);
   opacity: 1;
 }
 
 h1 {
-  color: #ff3333;
-  margin-bottom: 10px;
+  color: crimson;
+  margin-bottom: 12px;
 }
 
 p {
-  opacity: 0;
-  animation: fadeIn 1.2s forwards;
+  font-size: 15px;
+  opacity: 0.9;
 }
 
 .message {
-  background: linear-gradient(135deg, #8b0000, #ff0000);
-  padding: 18px;
-  border-radius: 15px;
+  background: linear-gradient(135deg, #7a0000, #b30000);
   margin: 20px 0;
-}
-
-small {
-  color: #ff4d4d;
-}
-
-#closeBtn {
-  margin-top: 15px;
-  padding: 10px 25px;
-  border-radius: 25px;
-  border: 1px solid red;
-  background: transparent;
-  color: white;
-  cursor: pointer;
+  padding: 18px;
+  border-radius: 14px;
+  animation: fadeIn 1.2s ease forwards;
 }
 
 @keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+small {
+  display: block;
+  margin-top: 10px;
+  color: #ff8080;
+}
+
+.closeBtn {
+  margin-top: 18px;
+  padding: 10px 28px;
+  border-radius: 30px;
+  border: 1px solid crimson;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* تحسين الموبايل */
+@media (max-width: 600px) {
+  h1 { font-size: 22px; }
+  p { font-size: 14px; }
+  .message { font-size: 15px; }
 }
 </style>
 </head>
@@ -123,37 +127,34 @@ small {
 <button id="openBtn">Open Message 💌</button>
 
 <div id="overlay">
-  <div id="box">
+  <div id="messageBox">
     <h1>Secret Message 💜</h1>
     <p>This message was not written for everyone… only for someone special 🌹</p>
 
     <div class="message">
-      <p>
-        I’m sorry, my dear 🤍<br />
-        You are my forever friend, Zina &lt;3 🌹
-      </p>
+      I’m sorry, my dear 🤍<br><br>
+      You are my forever friend, Zina &lt;3 🌹
     </div>
 
-    <small>by ahmad khaled</small><br /><br />
-    <button id="closeBtn">Close</button>
+    <small>by Ahmad Khaled</small>
+    <button class="closeBtn" onclick="closeMsg()">Close</button>
   </div>
 </div>
 
 <script>
-const openBtn = document.getElementById("openBtn");
+const btn = document.getElementById("openBtn");
 const overlay = document.getElementById("overlay");
-const box = document.getElementById("box");
-const closeBtn = document.getElementById("closeBtn");
+const box = document.getElementById("messageBox");
 
-openBtn.onclick = () => {
+btn.onclick = () => {
   overlay.style.display = "flex";
   setTimeout(() => box.classList.add("show"), 50);
 };
 
-closeBtn.onclick = () => {
+function closeMsg() {
   box.classList.remove("show");
-  setTimeout(() => overlay.style.display = "none", 500);
-};
+  setTimeout(() => overlay.style.display = "none", 400);
+}
 </script>
 
 </body>
