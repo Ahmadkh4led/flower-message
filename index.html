@@ -3,118 +3,122 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Secret Message</title>
+<title>Secret Message 💜</title>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
   font-family: "Georgia", serif;
 }
 
-body {
-  height: 100vh;
+body{
+  height:100vh;
   background: url("bg.jpg") center/cover no-repeat fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
 }
 
-/* زر البداية */
-.start-btn {
-  padding: 16px 36px;
-  font-size: 20px;
-  background: linear-gradient(135deg, #7a0000, #b30000);
-  color: white;
-  border: none;
-  border-radius: 40px;
-  cursor: pointer;
-  box-shadow: 0 0 20px rgba(255,0,0,0.4);
-  animation: pulse 2s infinite;
+/* زر فتح الرسالة */
+.open-btn{
+  padding:15px 35px;
+  font-size:18px;
+  border-radius:30px;
+  border:none;
+  cursor:pointer;
+  background:linear-gradient(135deg,#7b0000,#ff4d4d);
+  color:white;
+  box-shadow:0 0 15px rgba(255,0,0,0.6);
+  transition:transform .3s;
+}
+.open-btn:hover{
+  transform:scale(1.05);
 }
 
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
+/* Overlay */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:10;
 }
 
-/* الخلفية الداكنة */
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.7);
-  display: none;
-  justify-content: center;
-  align-items: center;
+/* الكارد */
+.card{
+  background:#000;
+  width:90%;
+  max-width:420px;
+  padding:30px;
+  border-radius:22px;
+  text-align:center;
+  box-shadow:0 0 45px rgba(255,0,0,0.45);
+
+  opacity:0;
+  transform:scale(.85);
+  transition:all .6s ease;
 }
 
-/* البوكس */
-.card {
-  background: #000;
-  padding: 30px;
-  width: 90%;
-  max-width: 420px;
-  border-radius: 20px;
-  text-align: center;
-  box-shadow: 0 0 40px rgba(255,0,0,0.4);
-  animation: zoomIn 0.6s ease forwards;
+.card.show{
+  opacity:1;
+  transform:scale(1);
 }
 
-@keyframes zoomIn {
-  from { transform: scale(0.7); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+.card h1{
+  color:#b30000;
+  margin-bottom:12px;
 }
 
-.card h1 {
-  color: #b30000;
-  margin-bottom: 10px;
+.card p{
+  color:#eee;
+  font-size:15px;
+  margin-bottom:18px;
 }
 
-.card p {
-  color: #ddd;
-  margin-bottom: 20px;
-  opacity: 0;
-  animation: fadeIn 1.5s forwards;
+/* رسالة المحتوى */
+.message{
+  background:linear-gradient(135deg,#4d0000,#990000);
+  padding:20px;
+  border-radius:18px;
+  color:white;
+  font-size:16px;
+  line-height:1.6;
+  margin-bottom:15px;
 }
 
-@keyframes fadeIn {
-  to { opacity: 1; }
+/* التوقيع */
+.signature{
+  color:#ff4d4d;
+  font-size:13px;
+  margin-bottom:18px;
 }
 
-.message {
-  background: linear-gradient(135deg, #5a0000, #a00000);
-  padding: 18px;
-  border-radius: 14px;
-  color: #fff;
-  margin-bottom: 15px;
+/* زر الإغلاق */
+.close-btn{
+  padding:8px 22px;
+  border-radius:20px;
+  border:1px solid #ff4d4d;
+  background:transparent;
+  color:#fff;
+  cursor:pointer;
+  transition:.3s;
 }
-
-.by {
-  color: #ff4d4d;
-  font-size: 14px;
-  margin-bottom: 15px;
-}
-
-.close-btn {
-  padding: 10px 26px;
-  border-radius: 25px;
-  border: 1px solid #b30000;
-  background: transparent;
-  color: #fff;
-  cursor: pointer;
+.close-btn:hover{
+  background:#ff4d4d;
 }
 
 /* تحسين الموبايل */
-@media (max-width: 600px) {
-  .card {
-    padding: 22px;
+@media(max-width:480px){
+  .card{
+    padding:22px;
   }
-  .start-btn {
-    font-size: 18px;
-    padding: 14px 30px;
+  .message{
+    font-size:15px;
   }
 }
 </style>
@@ -122,36 +126,50 @@ body {
 
 <body>
 
-<button class="start-btn" onclick="openMessage()">Open Message 💌</button>
+<button class="open-btn" onclick="openMessage()">Open Message 💌</button>
 
 <div class="overlay" id="overlay">
   <div class="card">
     <h1>Secret Message 💜</h1>
-    <p>This message was not written for everyone… only for someone special 🌹</p>
+    <p>This message was not written for everyone…<br>only for someone special 🌹</p>
 
     <div class="message">
-      I’m sorry, my dear 🤍 <br><br>
+      I’m sorry, my dear 🤍<br>
       You are my forever friend, Zina &lt;3 🌹
     </div>
 
-    <div class="by">by ahmad khaled</div>
+    <div class="signature">by ahmad khaled</div>
 
     <button class="close-btn" onclick="closeMessage()">Close</button>
   </div>
 </div>
 
 <audio id="sound">
-  <source src="https://www.soundjay.com/buttons/sounds/button-3.mp3" type="audio/mpeg">
+  <source src="https://assets.mixkit.co/sfx/preview/mixkit-bell-notification-933.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-function openMessage() {
-  document.getElementById("overlay").style.display = "flex";
-  document.getElementById("sound").play();
+function openMessage(){
+  const overlay=document.getElementById("overlay");
+  const card=document.querySelector(".card");
+
+  overlay.style.display="flex";
+
+  setTimeout(()=>{
+    card.classList.add("show");
+    document.getElementById("sound").play();
+  },100);
 }
 
-function closeMessage() {
-  document.getElementById("overlay").style.display = "none";
+function closeMessage(){
+  const overlay=document.getElementById("overlay");
+  const card=document.querySelector(".card");
+
+  card.classList.remove("show");
+
+  setTimeout(()=>{
+    overlay.style.display="none";
+  },400);
 }
 </script>
 
